@@ -1,0 +1,31 @@
+{% load static %}
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="{% static 'css/style.css' %}">
+       <script src="{% static 'js/main.js' %}"></script>
+       <title>Home</title>
+</head>
+<body>
+       <h1>Welcome to Home Page</h1>
+       Profile Name : <h4>{{name}}</h4>
+       {% if x > y %}
+           <p>In if block</p>
+           <p>{{x}} is greater</p>
+       {% else %} 
+           <p>{{y}} is greater</p>   
+       {% endif %}  
+       {% for x in l %} 
+          <p>{{x}}</p> 
+       {% endfor %}  
+       <h2>Products</h2>
+       {% for c in products %}
+           <strong>Product name:</strong> {{c.name}}&nbsp;&nbsp;&nbsp;
+           <strong>Category :</strong>{{c.cat}}&nbsp;&nbsp;&nbsp;
+           <strong>Price :</strong>{{c.price}}&nbsp;&nbsp;&nbsp;
+           <hr>
+       {% endfor %}    
+       <img src="{% static 'images/images.png' %}" alt="">
+</body>
+</html>

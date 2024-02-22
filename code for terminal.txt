@@ -1,0 +1,335 @@
+step 1: virtual envirnoment - a tool that helps to keep dependencies re3quired by different project
+separated by creating Isolated
+    * create a virtual envirnoment in folder
+    example:  pip install virtualenv
+    syntax:  pip install module_name
+             pip uninstall module_name
+    * python -m venv env       
+    * activate environment file
+       .\env\Scripts\activate  
+step 2:
+    installation of django and mysqlclient software
+     * pip install django
+     * pip install mysqlclient       
+ Step 3:
+     project creation
+      *django-admin startproject project_name  
+step 4:
+    application creation
+      * cd project_name
+      * python manage.py startapp app_name   
+Project files:
+=============
+   -pro  
+       -petstore -(app)
+            -migrations folder database 
+            -__init__.py (static file)
+            -admin.py (pre-build static page )
+            -apps.py (application static)
+            -models.py (create  table for a database which is integrated mysqlclient)
+            -tests.py (it is used to test our codes)
+            -views.py (CRUD operation)
+       -pro
+            -__init__.py (static file)
+            -asgi.py (asynoronic gatewy interface)
+            -setting.py 
+            -urls.py
+            -wsgi.py (website gateway interface)
+       -manage.py         
+
+step 5:
+        urls.py -project urls is a base urls
+         https:127.0.0.1:8000/index/
+         https:127.0.0.1:8000/contact/
+
+ step 6:         request
+    client ----------------------------->    django server 
+    |                                                |
+    |                                                |
+    |                                                |
+    |               404                                 |
+    |                        response       false    |
+    |   - - - -  ---------------------------------- - - urls.py project it check there is any urls
+    |                                                |
+    |                                                | true
+    |                                                |
+    |                                                | httpresponse
+    |                                                 
+    ------------- --------------------------- function in urls.py (view.py)
+                                                   render
+                                                   httpresponse
+
+     SQL queries to delete or update
+      delete from table_name where col=data;
+      update from table_set set col=data,col=data where ciol=date;
+
+      app/urls.py        
+      path('edit/rid',views.edit),
+
+      views.py
+      def edit(request,rid):
+       print("fddfd",rid)
+       return httpresponse("sdsdsddsds"+rid) 
+
+ class view  
+ =========
+ In this view a class can inherited with builtin django class view  
+
+ step 1: import 
+
+ step 2:
+   class ViewClassName(View):
+      def get(self,request):
+          body of the function
+          return response
+      def post(self,request):
+           body of the function
+           return response   
+
+Render:
+project folder i had create another folder named templates
+in that folder I had create a html file
+
+
+Redirect: 
+  from one url to another  urls
+
+DTL 
+===
+Django template language
+_______________________
+templates folder only html file
+
+html is tagging language
+
+* variable
+* if ..else
+* looping
+* reusability
+* inhertiance
+
+* how to send a variable to html page
+step 1:
+in views.py we need to create a function
+  def hello(request):
+        context={}
+        context['name']="prashanth"
+        return render(request,'index.html',context)
+step 2: 
+   in html page
+   <body>
+<h1> Templates as variable <h1>
+profile Name : <h4>{{name}}</h4>
+</body>
+</html>
+
+step 3:
+urls.py tag
+path('urls',views.function_name)
+
+* how to gave condition statement like if condition
+1.if condition
+syntax:
+  {% if condition %}
+       html codes
+  {% endif %}
+
+2.if ..else condition
+syntax:
+{% if condition %}
+    html codes
+ {% else %}
+    html codes 
+  {% endif %}   
+
+ 3.elif statement:
+ syntax:
+ {% if condition %}
+     html codes
+  {%  elif condition %}
+      html codes
+  {% elif condition %}
+      html codes
+   {% endif %}         
+
+ex:
+views.py
+--------
+def hello(request):
+context={}
+context['name']='prashanth'
+context['x']=20
+context['y']=100
+return render(request,'hello.html',context)
+
+html page
+---------
+<body>
+<h1> Templates as variable <h1>
+profile Name : <h4>{{name}}</h4>
+{% if x > y %}
+  <p> In if block</p>
+   <p> {{x}} is greater </p>
+{% else %}
+   <p>{{y}} is greater </p>
+{% endif %}
+</body>
+</html>  
+
+* looping statement
+1.for loop
+syntax:
+{% for i in collection %}
+     html codes
+{% endfor %} 
+
+looping condition
+=================
+step 1: views.py
+context['products']=[
+                      {'id':1,'name':'samsung','cat':'mobile','price':56000},
+                      {'id':2,'name':'Jeans','cat':'Clothes','price':5600},
+                      {'id':3,'name':'adidas Shoes','cat':'Shoes','price':1600},
+                      {'id':4,'name':'Shirts','cat':'Clothes','price':1000},
+                      {'id':5,'name':'Vivo','cat':'mobile','price':66000}
+
+                    ] 
+html page
+<body>
+<h1> Templates as variable <h1>
+profile Name : <h4>{{name}}</h4>
+{% if x > y %}
+  <p> In if block</p>
+   <p> {{x}} is greater </p>
+{% else %}
+   <p>{{y}} is greater </p>
+{% endif %}
+<h3>list is:</h3>
+{% for x in l %}
+  <p>{{x}}</p>
+{% endfor %}
+
+<h2>product </h2>
+{% for x in products %}
+       <strong> Product Name :</strong>{{x.name}} &nbsp;&nbsp;&nbsp;
+       <strong> Category :</strong>{{x.cat}}&nbsp;&nbsp;&nbsp;
+       <strong> Price :</strong>{{x.price}}&nbsp;&nbsp;&nbsp;
+<hr>
+  
+
+{% endfor %}
+</body>
+</html>
+
+@important you can also used npsp meaning "NonBreakingSPace instated of br tags
+
+Static folder implemenation for css and javascript and images
+=============================================================
+
+step 1:
+ create a folder at main project named as static
+
+ step 2:
+  create a folders inside the static folder 
+  
+  -static
+      -css
+        -style.css
+      -images
+         -image.png
+      -js
+         -main.css
+ step 3: create an css files and create {% load static %} 
+ in the head of the html page
+
+ step 4:
+ In header tag create link 
+ ex:<link rel='stylesheet' url='{% static 'css/file_name' %}  
+
+ step 5:create link in the setting .py for base_dirs
+
+ 
+STATICFILES_DIRS=[
+       os.path.join(BASE_DIR,'static')
+]  
+
+step 4:
+ In header tag create link 
+ ex:<link rel='stylesheet' url='{% static 'css/file_name' %}  
+
+
+JS link
+======
+
+step1:
+ in js file we needto write code
+ex:
+function greet(){
+alert("hello,javascript linked sucessfully")
+}
+
+
+step 2: link it in html page
+{% load static %}
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel='stylesheet' href="{% static 'css/style.css' %}">
+       <script src="{% static 'js/main.js' %}></script>
+       <title>Home</title>
+</head>
+<body>
+  <h1> Templates as variable <h1>
+profile Name : <h4>{{name}}</h4>
+{% if x > y %}
+  <p> In if block</p>
+   <p> {{x}} is greater </p>
+{% else %}
+   <p>{{y}} is greater </p>
+{% endif %}
+<h3>list is:</h3>
+{% for x in l %}
+  <p>{{x}}</p>
+{% endfor %}
+
+<h2>product </h2>
+{% for x in products %}
+       <strong> Product Name :</strong>{{x.name}} &nbsp;&nbsp;&nbsp;
+       <strong> Category :</strong>{{x.cat}}&nbsp;&nbsp;&nbsp;
+       <strong> Price :</strong>{{x.price}}&nbsp;&nbsp;&nbsp;
+<hr>
+  
+
+{% endfor %} 
+
+<button onclick="greet()">Click me<button>   
+</body>
+</html>
+
+
+Event in javascript
+===================
+
+user activity on browser is called as event in javascripts
+
+user click,double click,hover in,hoverout,keydown,keyup etc
+all are event in javascript
+
+To detect the occurs of the event i.e user activity on the browser, there are event handelers
+
+      Event      Eventhandelers(attributes)
+      click       onclick
+
+
+image files in static
+======================
+
+step 1:
+ in image folder store the img that you need
+step 2:
+ call the images using image function
+ex:
+<img src="{% static 'images/image.png' %} alt="">
+
+
